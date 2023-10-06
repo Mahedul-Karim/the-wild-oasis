@@ -26,13 +26,15 @@ function TodayItem({ activity }) {
   const { _id, status, guestId } = activity;
   console.log(guestId)
   return (
-    <StyledTodayItem>
+    <>
+      {guestId?.fullName && <StyledTodayItem>
       {status === "unconfirmed" && <Tag type="green">Arriving</Tag>}
       {status === "checked-in" && <Tag type="blue">Departing</Tag>}
 
       <Flag src={guestId?.countryFlag} alt={`Flag of ${guestId?.country}`} />
       <Guest>{guestId?.fullName}</Guest>
-    </StyledTodayItem>
+    </StyledTodayItem>}
+    </>
   );
 }
 
