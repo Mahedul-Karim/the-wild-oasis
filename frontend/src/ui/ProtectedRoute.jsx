@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Spinner from "./Spinner";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useMemo } from "react";
+import { useCtx } from "../context/ContextProvider";
 
 const FullPage = styled.div`
   height: 100vh;
@@ -13,15 +14,14 @@ const FullPage = styled.div`
 
 function ProtectedRoute({ children }) {
   const navigate = useNavigate();
-
-  // 1. Load the authenticated user
-  const user =useMemo(()=>JSON.parse(localStorage.getItem("user")),[]) ;
+  const { user } = useCtx();
+  
 
   // 2. If there is NO authenticated user, redirect to the /login
   useEffect(()=>{
 
     if (!user) navigate("/login");
-  },[user,navigate])
+  },[user.email,navigate])
 
   
 
