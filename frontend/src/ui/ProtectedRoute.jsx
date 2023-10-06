@@ -21,7 +21,7 @@ function ProtectedRoute({ children }) {
   useEffect(()=>{
 
     if (!user) navigate("/login");
-  },[user.email,navigate])
+  },[user?.email,navigate])
 
   
 
