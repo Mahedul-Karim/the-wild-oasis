@@ -8,18 +8,18 @@ import { useMutation } from "@tanstack/react-query";
 import { auth } from "../../services/apiAuth";
 import toast from "react-hot-toast";
 import SpinnerMini from "../../ui/SpinnerMini";
-
+import { useCtx } from "../../context/ContextProvider";
 
 function LoginForm() {
   const [email, setEmail] = useState("test@gmail.com");
   const [password, setPassword] = useState("test1234");
   const navigate = useNavigate();
-
+  const { setUser } = useCtx();
   const { mutate, isLoading } = useMutation({
     mutationFn: ({ endpoint, options }) => auth(endpoint, options),
     onSuccess: (data) => {
       navigate("/");
-      localStorage.setItem('user',JSON.stringify(data.user));
+      setUser(data.user);
       
     },
     onError: () => {
